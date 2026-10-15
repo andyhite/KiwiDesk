@@ -569,6 +569,27 @@ KiwiDesk.set_mode(1, "stack")
 KiwiDesk.set_mode("music", "floating")
 ```
 
+### toggle_mode
+
+:::unreleased
+**Expects:** a layout mode, as for [set_mode](#set_mode).
+
+**Does:** switches the active space to that layout until you call
+it again with the same mode, which restores the layout, window
+order and sizing the space had. A native-tab swap, an explicit
+ratio setter, `load_profile` and
+[`reset_layout_sizing`](#reset_layout_sizing) during the toggle
+also reach the layout it returns to. `set_mode` ends the toggle.
+No profile records it: a save or an add to the profile writes the
+layout the toggle left.
+
+**Example:**
+
+```lua
+KiwiDesk.toggle_mode("monocle")
+```
+:::
+
 ### set_gap_global
 
 **Expects:**

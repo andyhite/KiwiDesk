@@ -89,7 +89,7 @@ extension KiwiCore {
         let saved = savedModes(for: spaces)
         let drifted = { (space: SpaceID) in
             LayoutModeRows.drifted(
-                live: self.state.workspaces[space]?.mode,
+                live: self.state.workspaces[space]?.baseMode,
                 saved: saved[space]
             )
         }

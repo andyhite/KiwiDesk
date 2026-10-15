@@ -51,7 +51,7 @@ extension KiwiCore {
         let after = order.prefix { $0 != id }.last { declared.contains($0) }
         let added = AddedSpace(
             after: after,
-            mode: space.mode,
+            mode: space.baseMode,
             pin: spacePins[id],
             icon: tiler.settings.spaceIcons[id]
         )

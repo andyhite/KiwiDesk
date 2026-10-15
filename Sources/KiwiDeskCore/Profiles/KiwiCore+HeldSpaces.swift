@@ -71,7 +71,7 @@ extension KiwiCore {
                 if state.workspaces[id] != nil {
                     forwardWindows(of: id, to: space.id)
                 }
-                moveMembers(of: space.id, to: id, mode: space.mode)
+                moveMembers(of: space.id, to: id, mode: space.baseMode)
                 focus.spaceFocus[id] = space.focused
             }
             state.heldSpaces[id] = origin
@@ -146,7 +146,7 @@ extension KiwiCore {
         var focus = heldFocusTrackers()
         for (id, fresh) in zip(held, names) where fresh != id {
             guard let origin = state.heldSpaces[id] else { continue }
-            let mode = state.workspaces[id]?.mode ?? .bsp
+            let mode = state.workspaces[id]?.baseMode ?? .bsp
             focus.spaceFocus[fresh] = focus.spaceFocus[id]
             moveMembers(of: id, to: fresh, mode: mode)
             state.heldSpaces[id] = nil

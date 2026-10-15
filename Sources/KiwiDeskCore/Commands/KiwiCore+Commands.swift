@@ -90,6 +90,8 @@ extension KiwiCore {
             return gather(args)
         case "set_mode":
             return setMode(args)
+        case "toggle_mode":
+            return toggleMode(args)
         case "set_gap_global", "set_gap_override":
             return setGaps(command, args)
         case "set_min_window_size":

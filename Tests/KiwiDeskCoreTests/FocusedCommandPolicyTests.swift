@@ -51,6 +51,8 @@ struct FocusedCommandPolicyTests {
         // Acts on a Space's stored sizing, never the focused
         // window (#764).
         "reset_layout_sizing",
+        // Acts on the active Space's layout, never the focused window.
+        "toggle_mode",
         "subscribe",
         "border.fit_gaps",
         // Announces the next stop, touching no window (#930).

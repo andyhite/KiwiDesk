@@ -135,6 +135,9 @@ public struct Space: Sendable, Equatable {
     /// Session-only interactive resize ratio overrides
     /// (#458, `SessionRatios`).
     public var sessionRatios: SessionRatios
+    /// The layout `toggle_mode` stepped away from, restored by
+    /// `endingToggle()`; nil while no toggle holds. Session only.
+    public var toggleBase: ToggleBase? = nil
 
     public init(
         id: SpaceID,
@@ -170,6 +173,7 @@ public struct Space: Sendable, Equatable {
         sessionRatios = SessionRatios()
         stackWeights = [:]
         trackWeights = [:]
+        editBase { $0.resetSizing() }
     }
 
     /// Appends window if not already present.

@@ -8,6 +8,7 @@ extension Space {
     /// (#966), a bare id only that suite's text scan sees; it
     /// migrates so the viewport keeps re-anchoring.
     public mutating func rekey(_ old: WindowID, to new: WindowID) {
+        editBase { $0.rekey(old, to: new) }
         guard let index = windows.firstIndex(of: old) else {
             return
         }
