@@ -318,7 +318,9 @@ extension StateCoordinator {
                     title: $0.title
                 )
             } + owedFrameRecords(),
-            spaces: workspaces.allSpaces.map { spaceRecord(of: $0) },
+            spaces: workspaces.allSpaces.map {
+                spaceRecord(of: $0.endingToggle())
+            },
             activeSpace: workspaces.activeSpace?.raw
         )
     }

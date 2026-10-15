@@ -29,6 +29,9 @@ struct SpaceSizingCensusTests {
         "scrollRest": "the viewport's place, re-anchored by #966",
         "trackBreaks": "where the user broke the row (#128)",
         "handedBreaks": "a break's provenance (#1387)",
+        "toggleBase":
+            "the layout toggle_mode returns to; "
+            + "resetSizing clears its sizing too",
     ]
 
     /// Every property set away from its default — the census is
@@ -45,6 +48,7 @@ struct SpaceSizingCensusTests {
         space.handedBreaks = [w2]
         space.trackWeights = [w1: 1.5]
         space.sessionRatios.masterRatio = 0.6
+        space.toggleBase = .space(Space(id: SpaceID("1"), mode: .bsp))
         return space
     }
 

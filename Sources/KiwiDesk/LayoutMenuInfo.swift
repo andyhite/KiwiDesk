@@ -14,16 +14,25 @@ struct LayoutMenuInfo {
         /// Display frame origin for ordering (`DeskOrder`).
         let origin: CGPoint
         let mode: LayoutMode?
+        /// The layout the profile would keep when it differs from
+        /// `mode` (toggle_mode holds); nil means `mode`.
+        var baseMode: LayoutMode?
         /// Saved layout mode from active profile, if known.
         let savedMode: LayoutMode?
 
         var hasDrifted: Bool {
-            LayoutMenuInfo.drifted(live: mode, saved: savedMode)
+            LayoutMenuInfo.drifted(
+                live: baseMode ?? mode,
+                saved: savedMode
+            )
         }
     }
 
     /// Focused space layout mode and profile saved state.
     let activeMode: LayoutMode?
+    /// The layout the profile would keep when it differs from
+    /// `activeMode` (toggle_mode holds); nil means `activeMode`.
+    var activeBaseMode: LayoutMode?
     let activeProfileName: String?
     let savedModeForActiveSpace: LayoutMode?
     /// Every connected screen, in provider discovery order.
@@ -39,7 +48,7 @@ struct LayoutMenuInfo {
 
     var activeSpaceHasDrifted: Bool {
         Self.drifted(
-            live: activeMode,
+            live: activeBaseMode ?? activeMode,
             saved: savedModeForActiveSpace
         )
     }
@@ -70,6 +79,7 @@ struct LayoutMenuInfo {
     /// Empty initial layout menu state.
     static let empty = LayoutMenuInfo(
         activeMode: nil,
+        activeBaseMode: nil,
         activeProfileName: nil,
         savedModeForActiveSpace: nil,
         screens: []

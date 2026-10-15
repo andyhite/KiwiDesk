@@ -55,6 +55,33 @@ struct TemporarySpaceScopeTests {
         #expect(declared?.contains(SpaceID(7)) == true)
     }
 
+    @Test(
+        "adding a toggled Space writes its base layout, not the toggle",
+        .enabled(if: NSScreen.main != nil)
+    )
+    func addWhileToggled() throws {
+        let core = try desk.docked()
+        core.execute(
+            "pin_space_to_display",
+            args: [.string("7"), .string(desk.dell.fingerprint)]
+        )
+        core.execute(
+            "set_mode",
+            args: [.string("7"), .string("monocle")]
+        )
+        core.execute("focus_space", args: [.string("7")])
+        core.execute("toggle_mode", args: [.string("stack")])
+        #expect(core.state.workspaces[SpaceID(7)]?.mode == .stack)
+        #expect(
+            core.execute(
+                "create_space",
+                args: [.string("7"), .string("profile")]
+            ).isSuccess
+        )
+        let stored = try core.profiles.read(name: "desk")
+        #expect(stored.spaceModes[SpaceID(7)] == .monocle)
+    }
+
     @Test("a Space made with profile never becomes temporary")
     func createNewWithProfile() throws {
         let core = try desk.docked()

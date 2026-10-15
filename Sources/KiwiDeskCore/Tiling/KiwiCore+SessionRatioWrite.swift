@@ -43,6 +43,7 @@ extension KiwiCore {
         for space in state.workspaces.allSpaces {
             state.workspaces.withSpace(space.id) {
                 clear(&$0.sessionRatios)
+                $0.editBase { clear(&$0.sessionRatios) }
             }
         }
     }
@@ -58,6 +59,7 @@ extension KiwiCore {
     ) {
         state.workspaces.withSpace(space) {
             clear(&$0.sessionRatios)
+            $0.editBase { clear(&$0.sessionRatios) }
         }
     }
 }

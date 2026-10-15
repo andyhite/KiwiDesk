@@ -25,7 +25,10 @@ struct SnapshotCarryCensusTests {
         "handedBreaks":
             "a break's provenance for a departed head's return "
             + "(#1387) — draws nothing, and no head is departed "
-            + "across a restart"
+            + "across a restart",
+        "toggleBase":
+            "session-only by ruling; every capture records the base "
+            + "layout instead (endingToggle)",
     ]
 
     /// `ManagedWindow` properties the next process's scan reads
@@ -117,6 +120,7 @@ struct SnapshotCarryCensusTests {
             $0.sessionRatios.splitRatioV = 0.62
             $0.sessionRatios.masterRatio = 0.44
             $0.sessionRatios.slotSize = .fraction(0.712345678)
+            $0.toggleBase = .space($0)
         }
         core.state.setFloating(w1, true)
         core.state.setSticky(w1, .display)

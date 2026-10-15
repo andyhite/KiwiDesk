@@ -30,8 +30,9 @@ struct SessionRatioSeamTests {
 
     /// Files that may spell a write, with today's count and why.
     private let allowed: [String: Int] = [
-        // The seam: the four `write*` and the two clears.
-        "Tiling/KiwiCore+SessionRatioWrite.swift": 6,
+        // The seam: the four `write*`, the two clears and the
+        // clears' repeat on a toggle's stored base.
+        "Tiling/KiwiCore+SessionRatioWrite.swift": 8,
         // The model's own init and `resetSizing`.
         "Models/SpaceModel.swift": 2,
         // The mode-change reseed (#458).

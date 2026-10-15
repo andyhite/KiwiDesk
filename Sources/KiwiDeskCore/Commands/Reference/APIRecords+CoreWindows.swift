@@ -170,6 +170,11 @@ extension APIReference {
             .space("space"),
             .choice("mode", LayoutMode.self)
         ),
+        "toggle_mode": APIRecord(
+            "Switches the active Space to a temporary layout, or "
+                + "back; no profile records it.",
+            .choice("layout", LayoutMode.self)
+        ),
         "set_fallback_space": APIRecord(
             "Sets where windows land when a profile drops their "
                 + "Space.",

@@ -91,11 +91,12 @@ extension KiwiCore {
     }
 
     /// The live Spaces the whole-live snapshot writes: every one
-    /// but a held Space, temporary ones included (#1790).
+    /// but a held Space, temporary ones included (#1790), each with
+    /// any `toggle_mode` layout ended so a write records the base.
     var snapshotSpaces: [Space] {
         state.workspaces.allSpaces.filter {
             state.heldSpaces[$0.id] == nil
-        }
+        }.map { $0.endingToggle() }
     }
 
     /// The live pins an arrangement write captures — a held

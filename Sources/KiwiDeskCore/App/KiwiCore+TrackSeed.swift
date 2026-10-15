@@ -15,7 +15,10 @@ extension KiwiCore {
     /// live `tiler.settings` for the rule and capacity, so a
     /// config-apply caller must assign `tiler.settings` BEFORE its
     /// `setSpaceMode` loop (both bulk-apply callers already do).
+    /// An authoritative mode write ends any `toggle_mode` layout
+    /// first, restoring its base.
     func setSpaceMode(_ id: SpaceID, _ mode: LayoutMode) {
+        state.workspaces.withSpace(id) { $0.endToggle() }
         // Compute the seed BEFORE the mutating `setMode` — reading
         // `state.workspaces` inside it would overlap the exclusive
         // access. Only on a genuine entry, so dense profile / config

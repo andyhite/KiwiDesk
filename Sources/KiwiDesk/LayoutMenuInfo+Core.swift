@@ -17,6 +17,7 @@ extension LayoutMenuInfo {
         let saved = core.savedModes(for: shown.map(\.space))
         return LayoutMenuInfo(
             activeMode: core.activeSpace?.mode,
+            activeBaseMode: core.activeSpace?.baseMode,
             activeProfileName: core.profiles.currentName,
             savedModeForActiveSpace: core.savedModeForActiveSpace(),
             screens: shown.map { entry in
@@ -26,6 +27,7 @@ extension LayoutMenuInfo {
                     id: entry.display.id,
                     origin: entry.display.frame.origin,
                     mode: workspaces[entry.space]?.mode,
+                    baseMode: workspaces[entry.space]?.baseMode,
                     savedMode: saved[entry.space]
                 )
             }
